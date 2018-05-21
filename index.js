@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
 
-require('./server/passport');
-require('./server/authRoutes')(app);
+mongoose.connect(keys.mlabURI);
+
+require('./services/passport');
+require('./models/User');
+require('./services/authRoutes')(app);
 
 const PORT = process.env.port || 5000;
 
